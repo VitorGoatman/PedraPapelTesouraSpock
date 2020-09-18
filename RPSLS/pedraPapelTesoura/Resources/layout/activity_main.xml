@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:minWidth="25px"
+    android:minHeight="25px"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/linearLayout1">
+    <android.support.percent.PercentFrameLayout
+        android:id="@+id/percentLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:text="Escolha um:"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView1" />
+        <ImageButton
+            android:src="@drawable/pedra"
+            app:layout_widthPercent="26%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="0%"
+            app:layout_marginLeftPercent="37%"
+            app:backgroundTint="@android:color/transparent"
+            android:scaleType="fitCenter"
+            android:id="@+id/btnPedra"
+            android:contentDescription="description"/>
+        <ImageButton
+            android:src="@drawable/papel"
+            android:scaleType="centerInside"
+            app:layout_widthPercent="26%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="14%"
+            app:layout_marginLeftPercent="15%"
+            app:backgroundTint="@android:color/transparent"
+            android:id="@+id/btnPapel" />
+        <ImageButton
+            android:src="@drawable/tesoura"
+            android:scaleType="centerInside"
+            app:layout_widthPercent="26%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="14%"
+            app:layout_marginLeftPercent="60%"
+            app:backgroundTint="@android:color/transparent"
+            android:id="@+id/btnTesoura"/>
+        <ImageButton
+            android:src="@drawable/lagarto"
+            android:scaleType="centerInside"
+            app:layout_widthPercent="26%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="31%"
+            app:layout_marginLeftPercent="25%"
+            app:backgroundTint="@android:color/transparent"
+            android:id="@+id/btnLagarto"/>
+        <ImageButton
+            android:src="@drawable/spock"
+            android:scaleType="centerInside"
+            app:layout_widthPercent="26%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="31%"
+            app:layout_marginLeftPercent="51%"
+            app:backgroundTint="@android:color/transparent"
+            android:id="@+id/btnSpock" />
+        <TextView
+            android:text="Placar: "
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_marginTopPercent="58%"
+            android:id="@+id/txtvPlacar" />
+         <Button
+            android:text="Quais eram as regras mesmo? "
+            android:textColor="#c7c7c7"
+            android:gravity="center"
+            android:background="@android:color/transparent"
+             app:backgroundTint="@android:color/transparent"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_marginTopPercent="90%"
+            android:id="@+id/btnRegras" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            app:layout_widthPercent="26%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="65%"
+            app:layout_marginLeftPercent="20%"
+            android:visibility="invisible"
+            android:id="@+id/imageViewPlayer" />
+        <ImageView
+            android:src="@android:drawable/ic_menu_gallery"
+            android:visibility="invisible"
+            app:layout_widthPercent="26%"
+            app:layout_marginLeftPercent="55%"
+            app:layout_heightPercent="26%"
+            app:layout_marginTopPercent="65%"
+            android:id="@+id/imageViewCPU" />
+        <ToggleButton
+            android:background="@drawable/audioOn"
+            app:layout_widthPercent="10%"
+            app:layout_heightPercent="6%"
+            android:checked="true"
+             app:backgroundTint="@android:color/transparent"
+            app:layout_marginLeftPercent="90%"
+             android:textOff=""
+            android:textOn=""
+            android:id="@+id/toggleBtn" />
+        <TextView
+            android:text="Teste: "
+            android:gravity="center"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_marginTopPercent="75%"
+            android:id="@+id/txtvT" />
+    </android.support.percent.PercentFrameLayout>
+</LinearLayout>
