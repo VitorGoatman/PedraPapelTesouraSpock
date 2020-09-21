@@ -1,7 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
+    android:background="#720707"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <EditText
+        android:textColorHint="#E0FFFF"
+        android:textColor="#E0FFFF"
+        android:hint="Informe o nome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtNome" />
+ <Button
+            android:id="@+id/btnJogar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Começar"
+            android:layout_weight="0" />
+    <Button
+            android:id="@+id/btnRanking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ranking"
+            android:layout_weight="0" />
 </LinearLayout>

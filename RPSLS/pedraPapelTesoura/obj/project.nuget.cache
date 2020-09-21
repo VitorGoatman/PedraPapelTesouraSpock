@@ -1,9 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "xu5T9MW4A7Z/+q/l6f6FreKpyWRhezdXQDbjGlBOwPHzhbtH5CJA9GbljIPveBNPiSQxNTBa9IZ9kjM6CjQmPA==",
+  "dgSpecHash": "qZS8YfoJ3gtkcDok2hK3LJRnPY0v9iq2ik7al+mphFQZKk+R2G710e7qTxni4MDjEw7a9k0/EHW1YGKbRWk2xw==",
   "success": true,
   "projectFilePath": "C:\\Xamarin\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Pablo\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\sqlitepclraw.core\\2.0.3\\sqlitepclraw.core.2.0.3.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3.android\\2.0.3\\sqlitepclraw.lib.e_sqlite3.android.2.0.3.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.0.3\\sqlitepclraw.provider.e_sqlite3.2.0.3.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\system.buffers\\4.4.0\\system.buffers.4.4.0.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512",
+    "C:\\Users\\Pablo\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\4.5.2\\system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\xamarin.android.arch.core.common\\1.1.1.3\\xamarin.android.arch.core.common.1.1.1.3.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\xamarin.android.arch.core.runtime\\1.1.1.3\\xamarin.android.arch.core.runtime.1.1.1.3.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\xamarin.android.arch.lifecycle.common\\1.1.1.3\\xamarin.android.arch.lifecycle.common.1.1.1.3.nupkg.sha512",

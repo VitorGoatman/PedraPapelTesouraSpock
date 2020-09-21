@@ -9,17 +9,26 @@ using System.Drawing;
 using Android.Views;
 using Android.Media;
 using Android.Graphics.Drawables;
+using AlertDialog = Android.App.AlertDialog;
+using pedraPapelTesoura.Resources.Model;
+using pedraPapelTesoura.Resources.DataBaseHelper;
+using pedraPapelTesoura;
+using System.Collections.Generic;
 
 namespace pedraPapelTesoura
 {
-    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = true   )]
+    [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false   )]
     public class MainActivity : AppCompatActivity
     {
+        DataBase db = new DataBase();
+        List<Player> rankingPlayers = new List<Player>();
+
         const int pedra = 1;
         const int tesoura = 2;
         const int papel = 3;
         const int lagarto = 4;
         const int spock = 5;
+        int vitorias = 0;
         int pontosPlayer = 0;
         int pontosComputer = 0;
         int empates = 0;
@@ -39,6 +48,8 @@ namespace pedraPapelTesoura
         ImageView ImageCPU;
         ToggleButton Audio;
         TextView Teste;
+        EditText txtNome;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -46,6 +57,9 @@ namespace pedraPapelTesoura
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
+
+            CriarBancoDados();
+   
 
             vitoria = MediaPlayer.Create(this, Resource.Raw.victory);
             derrota = MediaPlayer.Create(this, Resource.Raw.defeat);
@@ -61,9 +75,10 @@ namespace pedraPapelTesoura
             Regras = FindViewById<Button>(Resource.Id.btnRegras);
             Audio = FindViewById<ToggleButton>(Resource.Id.toggleBtn);
             Teste = FindViewById<TextView>(Resource.Id.txtvT);
-            
-            
 
+            txtNome = FindViewById<EditText>(Resource.Id.txtNome);
+
+            CarregarDados();
             Pedra.Click += Pedra_Click;
             Tesoura.Click += Tesoura_Click;
             Papel.Click += Papel_Click;
@@ -88,9 +103,22 @@ namespace pedraPapelTesoura
                 Teste.Text = "Player: " + playerId.ToString() + "CPU : " + computerId.ToString();
                 
             }
-
+           
         }
-        
+        private void CarregarDados()
+        {
+            rankingPlayers = db.GetPlayers();
+            var adapter = new listAdapter(this, rankingPlayers);
+           // lvDados.Adapter = adapter;
+        }
+
+        //rotina para criar o banco de dados
+        private void CriarBancoDados()
+        {
+            db = new DataBase();
+            db.CriarBancoDeDados();
+        }
+
         private void Musica_Click(object sender, EventArgs e)
         {
             if (Audio.Checked)
@@ -176,6 +204,7 @@ namespace pedraPapelTesoura
                 empates = 0;
                 Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
                 placar = Placar.Text;
+               
             }
             if (pontosPlayer == 5)
             {
@@ -183,6 +212,15 @@ namespace pedraPapelTesoura
                 {
                     vitoria.Start();
                 }
+
+                vitorias++;
+                Player player = new Player()
+                {
+                    Id = int.Parse(txtNome.Tag.ToString()),
+                    Vitorias = vitorias
+                };
+                db.AtualizarPlayer(player);
+                CarregarDados();
 
                 Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
                 caixa.SetTitle("Fim de jogo!");
@@ -267,6 +305,16 @@ namespace pedraPapelTesoura
                 empates = 0;
                 Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
                 placar = Placar.Text;
+
+                vitorias++;
+                Player player = new Player()
+                {
+
+                    Id = int.Parse(txtNome.Tag.ToString()),
+                    Vitorias = vitorias
+                };
+                db.AtualizarPlayer(player);
+                CarregarDados();
             }
         }
 
@@ -339,6 +387,15 @@ namespace pedraPapelTesoura
                 empates = 0;
                 Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
                 placar = Placar.Text;
+
+                vitorias++;
+                Player player = new Player()
+                {
+                    Id = int.Parse(txtNome.Tag.ToString()),
+                    Vitorias = vitorias
+                };
+                db.AtualizarPlayer(player);
+                CarregarDados();
             }
         }
         private void Papel_Click(object sender, EventArgs e)
@@ -412,6 +469,15 @@ namespace pedraPapelTesoura
                 empates = 0;
                 Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
                 placar = Placar.Text;
+
+                vitorias++;
+                Player player = new Player()
+                {
+                    Id = int.Parse(txtNome.Tag.ToString()),
+                    Vitorias = vitorias
+                };
+                db.AtualizarPlayer(player);
+                CarregarDados();
             }
         }
 
@@ -485,6 +551,15 @@ namespace pedraPapelTesoura
                 empates = 0;
                 Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
                 placar = Placar.Text;
+
+                vitorias++;
+                Player player = new Player()
+                {
+                    Id = int.Parse(txtNome.Tag.ToString()),
+                    Vitorias = vitorias
+                };
+                db.AtualizarPlayer(player);
+                CarregarDados();
             }
 
         }

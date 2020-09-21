@@ -6,8 +6,8 @@ androidenableprofiledaot=false
 androiddextool=d8
 androidlinktool=
 androidpackageformat=apk
-usesharedruntime=false
-embedassembliesintoapk=true
+usesharedruntime=true
+embedassembliesintoapk=false
 androidlinkmode=none
 androidlinkskip=
 androidsdkbuildtoolsversion=29.0.2
@@ -24,7 +24,9 @@ androidgeneratejnimarshalmethods=false
 os=windows_nt
 androidincludedebugsymbols=true
 androidpackagenamingpolicy=lowercasecrc64
-_nugetassetstimestamp=637338394508959527
+_nugetassetstimestamp=637362203079737369
 typemapkind=strings-asm
-androidsupportedabis=armeabi-v7a
-arm64-v8a
+androidsupportedabis=arm64-v8a
+armeabi-v7a
+x86
+x86_64
