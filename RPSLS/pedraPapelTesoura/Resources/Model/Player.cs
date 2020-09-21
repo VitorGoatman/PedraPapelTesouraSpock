@@ -17,13 +17,10 @@ namespace pedraPapelTesoura.Resources.Model
     class Player
     {
         [PrimaryKey, AutoIncrement]
-
         public int Id { get; set; }
 
         public string Nome { get; set; }
-
         public int Vitorias { get; set; }
-
         public Player() { }
 
     }
