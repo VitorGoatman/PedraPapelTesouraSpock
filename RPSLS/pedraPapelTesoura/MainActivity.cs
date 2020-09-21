@@ -473,8 +473,7 @@ namespace pedraPapelTesoura
                 vitorias++;
                 Player player = new Player()
                 {
-                    Id = int.Parse(txtNome.Tag.ToString()),
-                    Nome = txtNome.Text,
+                    Id = int.Parse(txtNome.Tag.ToString(),
                     Vitorias = vitorias
                 };
                 db.AtualizarPlayer(player);
