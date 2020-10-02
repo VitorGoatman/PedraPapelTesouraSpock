@@ -12,6 +12,7 @@ using Android.Widget;
 using pedraPapelTesoura.Resources.Model;
 using pedraPapelTesoura.Resources.DataBaseHelper;
 using pedraPapelTesoura;
+using Android.Media;
 
 namespace pedraPapelTesoura.Resources
 {
@@ -23,6 +24,8 @@ namespace pedraPapelTesoura.Resources
         EditText txtNome;
         Button btnJogar;
         Button btnRanking;
+        MediaPlayer intro;
+
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -35,6 +38,10 @@ namespace pedraPapelTesoura.Resources
             CriarBancoDados();
 
             // Create your application here
+            intro = MediaPlayer.Create(this, Resource.Raw.intro);
+       
+                    intro.Start();
+           
 
             txtNome = FindViewById<EditText>(Resource.Id.txtNome);
             btnJogar = FindViewById<Button>(Resource.Id.btnJogar);
@@ -43,14 +50,18 @@ namespace pedraPapelTesoura.Resources
 
             btnJogar.Click += delegate
             {
-                Player player = new Player()
+                if (txtNome.Text != "")
                 {
-                    Nome = txtNome.Text
-                };
-                db.InserirPlayer(player);
-
-                Intent novaleta = new Intent(this, typeof(MainActivity));
-                StartActivity(novaleta);
+                    intro.Stop();
+                    Intent novaleta = new Intent(this, typeof(MainActivity));
+                    novaleta.PutExtra("nome", txtNome.Text);
+                    StartActivity(novaleta);
+                }
+                else
+                {
+                    string mensagem = string.Format("Insira um nickname!");
+                    Toast.MakeText(this, mensagem, ToastLength.Short).Show();
+                }
             };
 
             btnRanking.Click += BtnRanking_Click;
@@ -59,6 +70,7 @@ namespace pedraPapelTesoura.Resources
 
         private void BtnRanking_Click(object sender, EventArgs e)
         {
+            intro.Stop();
             Intent novaleta = new Intent(this, typeof(ranking));
             StartActivity(novaleta);
         }

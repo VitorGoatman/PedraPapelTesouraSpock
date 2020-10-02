@@ -14,6 +14,10 @@ using pedraPapelTesoura.Resources.Model;
 using pedraPapelTesoura.Resources.DataBaseHelper;
 using pedraPapelTesoura;
 using System.Collections.Generic;
+using Android.Content;
+using pedraPapelTesoura.Resources;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace pedraPapelTesoura
 {
@@ -47,9 +51,9 @@ namespace pedraPapelTesoura
         ImageView ImagePlayer;
         ImageView ImageCPU;
         ToggleButton Audio;
-        TextView Teste;
+        Button Teste;
         EditText txtNome;
-
+        TextView nome;
 
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -74,7 +78,11 @@ namespace pedraPapelTesoura
             ImageCPU = FindViewById<ImageView>(Resource.Id.imageViewCPU);
             Regras = FindViewById<Button>(Resource.Id.btnRegras);
             Audio = FindViewById<ToggleButton>(Resource.Id.toggleBtn);
-            Teste = FindViewById<TextView>(Resource.Id.txtvT);
+            Teste = FindViewById<Button>(Resource.Id.txtvT);
+
+            nome = FindViewById<TextView>(Resource.Id.nome);
+            if (Intent.GetStringExtra("nome") != null)
+                nome.Text = Intent.GetStringExtra("nome").ToString();
 
             txtNome = FindViewById<EditText>(Resource.Id.txtNome);
 
@@ -86,6 +94,7 @@ namespace pedraPapelTesoura
             Spock.Click += Spock_Click;
             Regras.Click += Regras_Click;
             Audio.Click += Musica_Click;
+            Teste.Click += Teste_Click;
 
             Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
             placar = Placar.Text;
@@ -100,11 +109,39 @@ namespace pedraPapelTesoura
                 int computerId = savedInstanceState.GetInt("CPU");
                 // ImagePlayer.SetImageResource(playerId);
                 // ImageCPU.SetImageResource(computerId);
-                Teste.Text = "Player: " + playerId.ToString() + "CPU : " + computerId.ToString();
+                //Teste.Text = "Player: " + playerId.ToString() + "CPU : " + computerId.ToString();
                 
             }
            
         }
+
+        private void Teste_Click(object sender, EventArgs e)
+        {
+            Player player = new Player()
+            {
+                Nome = nome.Text,
+               // Id = int.Parse(txtNome.Tag.ToString()),
+                Vitorias = vitorias
+            };
+            db.InserirPlayer(player);
+            CarregarDados();
+
+            AlertDialog.Builder caixa = new AlertDialog.Builder(this);
+            caixa.SetTitle("Obrigado por jogar!");
+            caixa.SetMessage("Confira sua posição no ranking!");
+            caixa.Show();
+            StartTimer();
+
+    //        Intent telainicial = new Intent(this, typeof(tela_inicial));
+      //      StartActivity(telainicial);
+        }
+
+        public async void StartTimer()
+        {
+            await Task.Delay(5000); //60 minutes
+            StartActivity(typeof(tela_inicial));
+        }
+
         private void CarregarDados()
         {
             rankingPlayers = db.GetPlayers();
@@ -139,7 +176,7 @@ namespace pedraPapelTesoura
 
         private void Regras_Click(object sender, EventArgs e)
         {
-            Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
+           AlertDialog.Builder caixa = new AlertDialog.Builder(this);
             caixa.SetTitle("Regras");
             caixa.SetMessage("Pedra, papel, tesoura, lagarto, Spock. É muito simples. Olhe – "
                 + "tesoura corta papel, papel cobre pedra, pedra esmaga lagarto, "
@@ -216,7 +253,7 @@ namespace pedraPapelTesoura
                 vitorias++;
                 Player player = new Player()
                 {
-                    Id = int.Parse(txtNome.Tag.ToString()),
+                    //Id = int.Parse(txtNome.Tag.ToString()),
                     Vitorias = vitorias
                 };
                 db.AtualizarPlayer(player);
@@ -279,7 +316,7 @@ namespace pedraPapelTesoura
                     derrota.Start();
                 }
 
-                Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
+                AlertDialog.Builder caixa = new AlertDialog.Builder(this);
                 caixa.SetTitle("Fim de jogo!");
                 caixa.SetMessage("O CPU marcou 5 pontos! Você perdeu!");
                 caixa.Show();
@@ -307,14 +344,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-                Player player = new Player()
-                {
-
-                    Id = int.Parse(txtNome.Tag.ToString()),
-                    Vitorias = vitorias
-                };
-                db.AtualizarPlayer(player);
-                CarregarDados();
+               
             }
         }
 
@@ -361,7 +391,7 @@ namespace pedraPapelTesoura
                     derrota.Start();
                 }
 
-                Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
+               AlertDialog.Builder caixa = new AlertDialog.Builder(this);
                 caixa.SetTitle("Fim de jogo!");
                 caixa.SetMessage("O CPU marcou 5 pontos! Você perdeu!");
                 caixa.Show();
@@ -378,7 +408,7 @@ namespace pedraPapelTesoura
                     vitoria.Start();
                 }
 
-                Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
+               AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
                 caixa.SetTitle("Fim de jogo!");
                 caixa.SetMessage("Você marcou 5 pontos! Você ganhou!");
                 caixa.Show();
@@ -391,7 +421,7 @@ namespace pedraPapelTesoura
                 vitorias++;
                 Player player = new Player()
                 {
-                    Id = int.Parse(txtNome.Tag.ToString()),
+                 //   Id = int.Parse(txtNome.Tag.ToString()),
                     Vitorias = vitorias
                 };
                 db.AtualizarPlayer(player);
@@ -473,7 +503,7 @@ namespace pedraPapelTesoura
                 vitorias++;
                 Player player = new Player()
                 {
-                    Id = int.Parse(txtNome.Tag.ToString()),
+                   // Id = int.Parse(txtNome.Tag.ToString()),
                     Vitorias = vitorias
                 };
                 db.AtualizarPlayer(player);
@@ -555,7 +585,7 @@ namespace pedraPapelTesoura
                 vitorias++;
                 Player player = new Player()
                 {
-                    Id = int.Parse(txtNome.Tag.ToString()),
+                  //  Id = int.Parse(txtNome.Tag.ToString()),
                     Vitorias = vitorias
                 };
                 db.AtualizarPlayer(player);

@@ -8,6 +8,7 @@
     android:minHeight="25px"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/rpsls"
     android:id="@+id/linearLayout1">
     <android.support.percent.PercentFrameLayout
         android:id="@+id/percentLayout"
@@ -15,6 +16,7 @@
         android:layout_height="match_parent">
         <TextView
             android:text="Escolha um:"
+            android:textColor="#dbdbdb"
             android:textAlignment="center"
             android:textStyle="bold"
             android:textAppearance="?android:attr/textAppearanceLarge"
@@ -68,7 +70,9 @@
             app:backgroundTint="@android:color/transparent"
             android:id="@+id/btnSpock" />
         <TextView
-            android:text="Placar: "
+            android:textColor="#23b0ae"
+            android:textStyle="bold"
+            android:text="Placar: texto grande pra testar "
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
@@ -77,20 +81,20 @@
             android:id="@+id/txtvPlacar" />
          <Button
             android:text="Quais eram as regras mesmo? "
-            android:textColor="#c7c7c7"
+            android:textColor="#496cb8"
             android:gravity="center"
             android:background="@android:color/transparent"
              app:backgroundTint="@android:color/transparent"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_marginTopPercent="90%"
+            app:layout_marginTopPercent="93%"
             android:id="@+id/btnRegras" />
         <ImageView
             android:src="@android:drawable/ic_menu_gallery"
             app:layout_widthPercent="26%"
             app:layout_heightPercent="26%"
-            app:layout_marginTopPercent="65%"
+            app:layout_marginTopPercent="63%"
             app:layout_marginLeftPercent="20%"
             android:visibility="invisible"
             android:id="@+id/imageViewPlayer" />
@@ -100,7 +104,7 @@
             app:layout_widthPercent="26%"
             app:layout_marginLeftPercent="55%"
             app:layout_heightPercent="26%"
-            app:layout_marginTopPercent="65%"
+            app:layout_marginTopPercent="63%"
             android:id="@+id/imageViewCPU" />
         <ToggleButton
             android:background="@drawable/audioOn"
@@ -112,13 +116,22 @@
              android:textOff=""
             android:textOn=""
             android:id="@+id/toggleBtn" />
-        <TextView
-            android:text="Teste: "
+        <Button
+            android:text="Enviar Score "
+            android:textColor="#2e74ff"
             android:gravity="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_marginTopPercent="75%"
+            app:layout_marginTopPercent="85%"
+            app:backgroundTint="@android:color/transparent"
+
             android:id="@+id/txtvT" />
+        <TextView
+            android:visibility="invisible"
+            android:text="Text"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/nome" />
     </android.support.percent.PercentFrameLayout>
 </LinearLayout>

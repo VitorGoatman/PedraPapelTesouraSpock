@@ -1,2 +1,2 @@
-AdbTarget=-s a7766627
+AdbTarget=-s 127.0.0.1:5555
 AdbOptions=

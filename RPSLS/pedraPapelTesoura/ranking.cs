@@ -14,13 +14,14 @@ using pedraPapelTesoura.Resources.Model;
 using pedraPapelTesoura.Resources.DataBaseHelper;
 using pedraPapelTesoura;
 using Android.Support.V7.App;
-
+using Android.Media;
 
 namespace pedraPapelTesoura
 {
     [Activity(Label = "ranking")]
     public class ranking : Activity
     {
+        MediaPlayer outro;
         ListView lvDados;
         List<Player> rankingPlayers = new List<Player>();
         DataBase db = new DataBase();
@@ -31,6 +32,14 @@ namespace pedraPapelTesoura
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.ranking);
             // Create your application here
+            outro = MediaPlayer.Create(this, Resource.Raw.outro);
+
+            outro.Start();
+
+            if (savedInstanceState!=null)
+            {
+                outro.Stop();
+            }
 
             CriarBancoDados();
             lvDados = FindViewById<ListView>(Resource.Id.lvDados);

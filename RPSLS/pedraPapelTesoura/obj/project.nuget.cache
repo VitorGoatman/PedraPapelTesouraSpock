@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qZS8YfoJ3gtkcDok2hK3LJRnPY0v9iq2ik7al+mphFQZKk+R2G710e7qTxni4MDjEw7a9k0/EHW1YGKbRWk2xw==",
+  "dgSpecHash": "68vOpxq6sdI8hV0Rtu4WPTFG/NYV1avLnMoy77l3EAG5LZY97ta0yefwXgvhjXaki0GZVXHc6DkPUdaFR1MyjQ==",
   "success": true,
-  "projectFilePath": "C:\\Xamarin\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
+  "projectFilePath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pablo\\.nuget\\packages\\sqlite-net-pcl\\1.7.335\\sqlite-net-pcl.1.7.335.nupkg.sha512",
     "C:\\Users\\Pablo\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.0.3\\sqlitepclraw.bundle_green.2.0.3.nupkg.sha512",

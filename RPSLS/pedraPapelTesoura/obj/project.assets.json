@@ -1764,11 +1764,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Xamarin\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
+      "projectUniqueName": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
       "projectName": "pedraPapelTesoura",
-      "projectPath": "C:\\Xamarin\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
+      "projectPath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
       "packagesPath": "C:\\Users\\Pablo\\.nuget\\packages\\",
-      "outputPath": "C:\\Xamarin\\RPSLS\\pedraPapelTesoura\\obj\\",
+      "outputPath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock\\RPSLS\\pedraPapelTesoura\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
