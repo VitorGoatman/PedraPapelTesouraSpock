@@ -16,7 +16,6 @@ using Android.Media;
 using Android.Graphics.Drawables;
 using AlertDialog = Android.App.AlertDialog;
 using pedraPapelTesoura.Resources.Model;
-using pedraPapelTesoura.Resources.DataBaseHelper;
 using pedraPapelTesoura;
 using pedraPapelTesoura.Resources;
 using System.Threading;
@@ -27,7 +26,6 @@ namespace pedraPapelTesoura
     [Activity(Label = "teste") ]
     public class teste : Activity
     {
-        DataBase db = new DataBase();
         List<Player> rankingPlayers = new List<Player>();
         ListView lvDados;
 
@@ -39,29 +37,12 @@ namespace pedraPapelTesoura
             SetContentView(Resource.Layout.teste);
 
 
-            CriarBancoDados();
-
             // Create your application here
             lvDados = FindViewById<ListView>(Resource.Id.lvDados);
-            //db.GetVencedores(db.GetPlayer());
-
-            CarregarDados();
+            //db.GetVencedores(db.GetPlayer());  
 
 
         }
 
-        private void CarregarDados()
-        {
-            rankingPlayers = db.GetPlayers();
-            var adapter = new listAdapter(this, rankingPlayers);
-            lvDados.Adapter = adapter;
-        }
-
-        //rotina para criar o banco de dados
-        private void CriarBancoDados()
-        {
-            db = new DataBase();
-            db.CriarBancoDeDados();
-        }
     }
 }

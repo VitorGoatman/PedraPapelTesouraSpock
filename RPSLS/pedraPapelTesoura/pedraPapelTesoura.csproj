@@ -69,7 +69,6 @@
     <Compile Include="listAdapter.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="ranking.cs" />
-    <Compile Include="Resources\DataBaseHelper\DataBase.cs" />
     <Compile Include="Resources\Model\Player.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -108,6 +107,9 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_round.png" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="FirebaseDatabase.net">
+      <Version>4.0.4</Version>
+    </PackageReference>
     <PackageReference Include="sqlite-net-pcl">
       <Version>1.7.335</Version>
     </PackageReference>
@@ -118,6 +120,9 @@
       <Version>28.0.0.3</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
+    <PackageReference Include="Xamarin.Firebase.Auth">
+      <Version>71.1605.4</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\tesoura.jpg" />

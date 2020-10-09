@@ -11,10 +11,13 @@ using Android.Views;
 using Android.Widget;
 
 using pedraPapelTesoura.Resources.Model;
-using pedraPapelTesoura.Resources.DataBaseHelper;
 using pedraPapelTesoura;
 using Android.Support.V7.App;
 using Android.Media;
+using System.Threading.Tasks;
+using Firebase.Database;
+using Firebase.Database.Query;
+using System.ComponentModel;
 
 namespace pedraPapelTesoura
 {
@@ -24,8 +27,12 @@ namespace pedraPapelTesoura
         MediaPlayer outro;
         ListView lvDados;
         List<Player> rankingPlayers = new List<Player>();
-        DataBase db = new DataBase();
-        protected override void OnCreate(Bundle savedInstanceState)
+        List<Player> testeRanking = new List<Player>();
+        listAdapter adapter;
+
+        private const string FirebaseURL = "https://rpsls-1d228.firebaseio.com/"; //URL FIREBASE
+
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
@@ -34,6 +41,9 @@ namespace pedraPapelTesoura
             // Create your application here
             outro = MediaPlayer.Create(this, Resource.Raw.outro);
 
+
+
+
             outro.Start();
 
             if (savedInstanceState!=null)
@@ -41,21 +51,54 @@ namespace pedraPapelTesoura
                 outro.Stop();
             }
 
-            CriarBancoDados();
             lvDados = FindViewById<ListView>(Resource.Id.lvDados);
-            CarregarDados();
+
+           await carregaDados();
         }
-        private void CriarBancoDados()
+
+
+
+        private async Task carregaDados()
         {
-            db = new DataBase();
-            db.CriarBancoDeDados();
-        }
-        //Obtem todos os alunos da tabela Aluno e exibe no ListView
-        private void CarregarDados()
-        {
-            rankingPlayers = db.GetPlayers();
-            var adapter = new listAdapter(this, rankingPlayers);
+            //  circular_progress.Visibility = ViewStates.Visible;
+            lvDados.Visibility = ViewStates.Invisible;
+
+            var firebase = new FirebaseClient(FirebaseURL);
+
+            var itens = await firebase
+                .Child("Players")
+                .OnceAsync<Player>();
+
+            rankingPlayers.Clear();
+            adapter = null;
+            foreach (var item in itens)
+            {
+                Player player = new Player();
+                player.Id = item.Key;
+                player.nome = item.Object.nome;
+                player.Vitorias = item.Object.Vitorias;
+
+
+                rankingPlayers.Add(player);
+
+
+                adapter = new listAdapter(this, rankingPlayers);
+                rankingPlayers = rankingPlayers.OrderByDescending(x => player.Vitorias).ToList();
+                adapter.NotifyDataSetChanged();
             lvDados.Adapter = adapter;
+            lvDados.Visibility = ViewStates.Visible; 
+            }
+          /*  foreach (var item in itens)
+            {
+                Player player = new Player();
+                player.Id = item.Key;
+                player.nome = item.Object.nome;
+                player.Vitorias = item.Object.Vitorias;
+
+                testeRanking = rankingPlayers.OrderByDescending(x => player.Vitorias).ToList();
+
+            }*/
+            // circular_progress.Visibility = ViewStates.Invisible;
         }
     }
 }

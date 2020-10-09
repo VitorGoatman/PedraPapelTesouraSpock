@@ -17,14 +17,25 @@ namespace pedraPapelTesoura.Resources.Model
     class Player
     {
         [PrimaryKey, AutoIncrement]
+        public string Id { get; set; }
 
-        public int Id { get; set; }
-
-        public string Nome { get; set; }
+        public string senha { get; set; }
+        public string nome { get; set; }
 
         public int Vitorias { get; set; }
 
         public Player() { }
 
+        public Player(string nome, int Vitorias)
+        {
+            this.nome = nome;
+            this.Vitorias = Vitorias;
+        }
+
+        public Player(string nome, string senha)
+        {
+            this.nome = nome;
+            this.senha = senha;
+        }
     }
 }

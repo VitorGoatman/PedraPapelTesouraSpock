@@ -24,11 +24,13 @@ Xamarin.Android.Support.Fragment
 Xamarin.Android.Support.Interpolator
 Xamarin.Android.Support.Loader
 Xamarin.Android.Support.LocalBroadcastManager
+Xamarin.Android.Support.Media.Compat
 Xamarin.Android.Support.Percent
 Xamarin.Android.Support.Print
 Xamarin.Android.Support.SlidingPaneLayout
 Xamarin.Android.Support.SwipeRefreshLayout
 Xamarin.Android.Support.Transition
+Xamarin.Android.Support.v4
 Xamarin.Android.Support.v7.AppCompat
 Xamarin.Android.Support.v7.CardView
 Xamarin.Android.Support.v7.RecyclerView
@@ -36,3 +38,11 @@ Xamarin.Android.Support.Vector.Drawable
 Xamarin.Android.Support.VersionedParcelable
 Xamarin.Android.Support.ViewPager
 Xamarin.Essentials
+Xamarin.Firebase.Auth
+Xamarin.Firebase.Auth.Interop
+Xamarin.Firebase.Common
+Xamarin.Google.AutoValue.Annotations
+Xamarin.GooglePlayServices.Base
+Xamarin.GooglePlayServices.Basement
+Xamarin.GooglePlayServices.Flags
+Xamarin.GooglePlayServices.Tasks

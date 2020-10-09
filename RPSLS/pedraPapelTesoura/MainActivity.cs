@@ -11,20 +11,22 @@ using Android.Media;
 using Android.Graphics.Drawables;
 using AlertDialog = Android.App.AlertDialog;
 using pedraPapelTesoura.Resources.Model;
-using pedraPapelTesoura.Resources.DataBaseHelper;
 using pedraPapelTesoura;
 using System.Collections.Generic;
 using Android.Content;
 using pedraPapelTesoura.Resources;
 using System.Threading;
 using System.Threading.Tasks;
+using Firebase.Database;
+using Firebase.Database.Query;
+using Firebase.Auth;
+
 
 namespace pedraPapelTesoura
 {
     [Activity(Label = "@string/app_name", Theme = "@style/Theme.AppCompat.Light.NoActionBar", MainLauncher = false   )]
     public class MainActivity : AppCompatActivity
     {
-        DataBase db = new DataBase();
         List<Player> rankingPlayers = new List<Player>();
 
         const int pedra = 1;
@@ -53,17 +55,17 @@ namespace pedraPapelTesoura
         ToggleButton Audio;
         Button Teste;
         EditText txtNome;
-        TextView nome;
+        listAdapter adapter;
+        Player player;
 
-        protected override void OnCreate(Bundle savedInstanceState)
+        private const string FirebaseURL = "https://rpsls-1d228.firebaseio.com/"; //URL FIREBASE
+
+        protected override async void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             // Set our view from the "main" layout resource
             SetContentView(Resource.Layout.activity_main);
-
-            CriarBancoDados();
-   
 
             vitoria = MediaPlayer.Create(this, Resource.Raw.victory);
             derrota = MediaPlayer.Create(this, Resource.Raw.defeat);
@@ -79,14 +81,11 @@ namespace pedraPapelTesoura
             Regras = FindViewById<Button>(Resource.Id.btnRegras);
             Audio = FindViewById<ToggleButton>(Resource.Id.toggleBtn);
             Teste = FindViewById<Button>(Resource.Id.txtvT);
+            await carregaDados();
 
-            nome = FindViewById<TextView>(Resource.Id.nome);
-            if (Intent.GetStringExtra("nome") != null)
-                nome.Text = Intent.GetStringExtra("nome").ToString();
+            // txtNome = FindViewById<EditText>(Resource.Id.txtNome);
 
-            txtNome = FindViewById<EditText>(Resource.Id.txtNome);
 
-            CarregarDados();
             Pedra.Click += Pedra_Click;
             Tesoura.Click += Tesoura_Click;
             Papel.Click += Papel_Click;
@@ -112,19 +111,48 @@ namespace pedraPapelTesoura
                 //Teste.Text = "Player: " + playerId.ToString() + "CPU : " + computerId.ToString();
                 
             }
-           
+            
+
+        }
+
+        private async Task carregaDados()
+        {
+            //  circular_progress.Visibility = ViewStates.Visible;
+            //   lstUsuarios.Visibility = ViewStates.Invisible;
+
+            var firebase = new FirebaseClient(FirebaseURL);
+
+            var itens = await firebase
+                .Child("Players")
+                .OnceAsync<Player>();
+
+       //     rankingPlayers.Clear();
+      //      adapter = null;
+            foreach (var item in itens)
+            {
+                Player player = new Player();
+                player.Id = item.Key;
+                player.nome = item.Object.nome;
+                player.Vitorias = item.Object.Vitorias;
+
+            //    rankingPlayers.Add(player);
+                /*
+            adapter = new listAdapter(this, rankingPlayers);
+            adapter.NotifyDataSetChanged();
+            lstUsuarios.Adapter = adapter;
+            lstUsuarios.Visibility = ViewStates.Visible; */
+            }
+           /* if (Intent.GetStringExtra("Id") != null)
+                player.Id = Intent.GetStringExtra("Id").ToString();
+            Console.WriteLine("Placeholdermsmsla");*/
+            // circular_progress.Visibility = ViewStates.Invisible;
+        
         }
 
         private void Teste_Click(object sender, EventArgs e)
         {
-            Player player = new Player()
-            {
-                Nome = nome.Text,
-               // Id = int.Parse(txtNome.Tag.ToString()),
-                Vitorias = vitorias
-            };
-            db.InserirPlayer(player);
-            CarregarDados();
+
+            gravarDados();
 
             AlertDialog.Builder caixa = new AlertDialog.Builder(this);
             caixa.SetTitle("Obrigado por jogar!");
@@ -135,25 +163,35 @@ namespace pedraPapelTesoura
     //        Intent telainicial = new Intent(this, typeof(tela_inicial));
       //      StartActivity(telainicial);
         }
+        private async void gravarDados()
+        {
+            /* var firebase = new FirebaseClient(FirebaseURL);
+             await firebase.Child("Players").Child(player.Id).PutAsync(new Player(txtNome.Text, vitorias));
+             await carregaDados();
+             txtNome.Text = "";
+             vitorias = 0;*/
+
+            await carregaDados();
+
+
+            var firebase = new FirebaseClient(FirebaseURL);
+            Console.WriteLine("placeholderfodase");
+           
+            await firebase.Child("Players").Child(player.Id).PutAsync(player.Vitorias);
+            Console.WriteLine(player.Id);
+            Console.WriteLine(player.Vitorias);
+            await carregaDados();
+            Console.WriteLine("placeholderfodase");
+            txtNome.Text = "";
+            vitorias = 0;
+           
+
+        }
 
         public async void StartTimer()
         {
-            await Task.Delay(5000); //60 minutes
+            await Task.Delay(5000); //5 segundos
             StartActivity(typeof(tela_inicial));
-        }
-
-        private void CarregarDados()
-        {
-            rankingPlayers = db.GetPlayers();
-            var adapter = new listAdapter(this, rankingPlayers);
-           // lvDados.Adapter = adapter;
-        }
-
-        //rotina para criar o banco de dados
-        private void CriarBancoDados()
-        {
-            db = new DataBase();
-            db.CriarBancoDeDados();
         }
 
         private void Musica_Click(object sender, EventArgs e)
@@ -251,13 +289,7 @@ namespace pedraPapelTesoura
                 }
 
                 vitorias++;
-                Player player = new Player()
-                {
-                    //Id = int.Parse(txtNome.Tag.ToString()),
-                    Vitorias = vitorias
-                };
-                db.AtualizarPlayer(player);
-                CarregarDados();
+              
 
                 Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
                 caixa.SetTitle("Fim de jogo!");
@@ -419,13 +451,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-                Player player = new Player()
-                {
-                 //   Id = int.Parse(txtNome.Tag.ToString()),
-                    Vitorias = vitorias
-                };
-                db.AtualizarPlayer(player);
-                CarregarDados();
+              
             }
         }
         private void Papel_Click(object sender, EventArgs e)
@@ -501,13 +527,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-                Player player = new Player()
-                {
-                   // Id = int.Parse(txtNome.Tag.ToString()),
-                    Vitorias = vitorias
-                };
-                db.AtualizarPlayer(player);
-                CarregarDados();
+              
             }
         }
 
@@ -583,13 +603,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-                Player player = new Player()
-                {
-                  //  Id = int.Parse(txtNome.Tag.ToString()),
-                    Vitorias = vitorias
-                };
-                db.AtualizarPlayer(player);
-                CarregarDados();
+             
             }
 
         }

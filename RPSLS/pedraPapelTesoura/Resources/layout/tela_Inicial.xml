@@ -6,24 +6,40 @@
     android:layout_height="match_parent">
     <EditText
         android:textAlignment="center"
-        android:textColorHint="#E0FFFF"
-        android:textColor="#E0FFFF"
-        android:hint="Insira um nickname"
+        android:textColorHint="#50E6E0"
+        android:textColor="#50E6E0"
+        android:hint="Insira o nome de usuário"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtNome" />
- <Button
-            android:layout_gravity="center"
-            android:id="@+id/btnJogar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Começar"
-            android:layout_weight="0" />
+    <EditText
+          android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColorHint="#50E6E0"
+        android:textColor="#50E6E0"
+        android:hint="Insira a senha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtSenha" />
     <Button
-           android:layout_gravity="center"
-            android:id="@+id/btnRanking"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ranking"
-            android:layout_weight="0" />
+        android:layout_gravity="center"
+        android:id="@+id/btnJogar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Começar"
+        android:layout_weight="0" />
+        <Button
+        android:layout_gravity="center"
+        android:id="@+id/btnAdicionar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cadastrar"
+        android:layout_weight="0" />
+    <Button
+        android:layout_gravity="center"
+        android:id="@+id/btnRanking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ranking"
+        android:layout_weight="0" />
 </LinearLayout>

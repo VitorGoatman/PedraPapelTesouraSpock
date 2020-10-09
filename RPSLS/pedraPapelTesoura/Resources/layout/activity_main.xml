@@ -125,13 +125,7 @@
             android:layout_height="wrap_content"
             app:layout_marginTopPercent="85%"
             app:backgroundTint="@android:color/transparent"
-
             android:id="@+id/txtvT" />
-        <TextView
-            android:visibility="invisible"
-            android:text="Text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/nome" />
+     
     </android.support.percent.PercentFrameLayout>
 </LinearLayout>
