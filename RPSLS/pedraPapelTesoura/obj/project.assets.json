@@ -2504,11 +2504,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock - Copia\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
+      "projectUniqueName": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock2\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
       "projectName": "pedraPapelTesoura",
-      "projectPath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock - Copia\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
+      "projectPath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock2\\RPSLS\\pedraPapelTesoura\\pedraPapelTesoura.csproj",
       "packagesPath": "C:\\Users\\Pablo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock - Copia\\RPSLS\\pedraPapelTesoura\\obj\\",
+      "outputPath": "C:\\Users\\Pablo\\Documents\\Git\\PedraPapelTesouraSpock2\\RPSLS\\pedraPapelTesoura\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "fallbackFolders": [
