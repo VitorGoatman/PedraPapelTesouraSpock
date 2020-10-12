@@ -26,16 +26,12 @@ namespace pedraPapelTesoura.Resources.Model
 
         public Player() { }
 
-        public Player(string nome, int Vitorias)
+        public Player(string senha, string nome, int Vitorias)
         {
+            this.senha = senha;
             this.nome = nome;
             this.Vitorias = Vitorias;
         }
 
-        public Player(string nome, string senha)
-        {
-            this.nome = nome;
-            this.senha = senha;
-        }
     }
 }

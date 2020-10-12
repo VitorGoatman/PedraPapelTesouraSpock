@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtNome" />
     <EditText
-          android:inputType="textPassword"
+        android:inputType="textPassword"
         android:textAlignment="center"
         android:textColorHint="#50E6E0"
         android:textColor="#50E6E0"

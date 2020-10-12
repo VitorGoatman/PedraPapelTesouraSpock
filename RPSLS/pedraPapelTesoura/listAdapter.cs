@@ -56,6 +56,7 @@ namespace pedraPapelTesoura
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var item = players[position];
+            
             View view = convertView;
             if (view == null)
             {
@@ -64,6 +65,10 @@ namespace pedraPapelTesoura
              view.FindViewById<TextView>(Resource.Id.txtvNome).Text=item.nome;
              view.FindViewById<TextView>(Resource.Id.txtvVitorias).Text=item.Vitorias.ToString();
 
+         /*   if(players[position].Vitorias < players[position+1].Vitorias)
+            {
+                this.players[position] = players[position++];
+            }*/
             return view;
             //view.FindViewById<TextView>(Resource.Id.txtvVitorias).Text=item.senha;
 

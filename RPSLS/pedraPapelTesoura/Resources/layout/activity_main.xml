@@ -116,16 +116,7 @@
              android:textOff=""
             android:textOn=""
             android:id="@+id/toggleBtn" />
-        <Button
-            android:text="Enviar Score "
-            android:textColor="#2e74ff"
-            android:gravity="center"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_marginTopPercent="85%"
-            app:backgroundTint="@android:color/transparent"
-            android:id="@+id/txtvT" />
+        
      
     </android.support.percent.PercentFrameLayout>
 </LinearLayout>

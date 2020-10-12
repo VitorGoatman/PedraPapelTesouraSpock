@@ -18,6 +18,7 @@ using System.Threading.Tasks;
 using Firebase.Database;
 using Firebase.Database.Query;
 using System.ComponentModel;
+using System.Xml.XPath;
 
 namespace pedraPapelTesoura
 {
@@ -41,10 +42,8 @@ namespace pedraPapelTesoura
             // Create your application here
             outro = MediaPlayer.Create(this, Resource.Raw.outro);
 
-
-
-
             outro.Start();
+
 
             if (savedInstanceState!=null)
             {
@@ -56,11 +55,8 @@ namespace pedraPapelTesoura
            await carregaDados();
         }
 
-
-
         private async Task carregaDados()
         {
-            //  circular_progress.Visibility = ViewStates.Visible;
             lvDados.Visibility = ViewStates.Invisible;
 
             var firebase = new FirebaseClient(FirebaseURL);
@@ -78,27 +74,18 @@ namespace pedraPapelTesoura
                 player.nome = item.Object.nome;
                 player.Vitorias = item.Object.Vitorias;
 
-
+              
                 rankingPlayers.Add(player);
-
-
                 adapter = new listAdapter(this, rankingPlayers);
-                rankingPlayers = rankingPlayers.OrderByDescending(x => player.Vitorias).ToList();
+                //testeRanking = rankingPlayers.OrderByDescending(x => player.Vitorias).ToList();
+
+                //rankingPlayers.Sort();
+                //rankingPlayers = rankingPlayers.OrderByDescending(x => player.Vitorias).ToList();
+
                 adapter.NotifyDataSetChanged();
-            lvDados.Adapter = adapter;
-            lvDados.Visibility = ViewStates.Visible; 
+                lvDados.Adapter = adapter;
+                lvDados.Visibility = ViewStates.Visible; 
             }
-          /*  foreach (var item in itens)
-            {
-                Player player = new Player();
-                player.Id = item.Key;
-                player.nome = item.Object.nome;
-                player.Vitorias = item.Object.Vitorias;
-
-                testeRanking = rankingPlayers.OrderByDescending(x => player.Vitorias).ToList();
-
-            }*/
-            // circular_progress.Visibility = ViewStates.Invisible;
         }
     }
 }

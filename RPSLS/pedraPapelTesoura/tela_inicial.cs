@@ -53,16 +53,14 @@ namespace pedraPapelTesoura.Resources
        
                     intro.Start();
            
-
             txtNome = FindViewById<EditText>(Resource.Id.txtNome);
             txtSenha = FindViewById<EditText>(Resource.Id.txtSenha);
             btnJogar = FindViewById<Button>(Resource.Id.btnJogar);
             btnRanking = FindViewById<Button>(Resource.Id.btnRanking);
 
-
             btnJogar.Click += async delegate
             {
-                if (txtNome.Text != "" || txtSenha.Text != "")
+                if (txtNome.Text != "" && txtSenha.Text != "")
                 {
                     var firebase = new FirebaseClient(FirebaseURL);
 
@@ -82,22 +80,17 @@ namespace pedraPapelTesoura.Resources
                         {
                             intro.Stop();
                             Intent novatela = new Intent(this, typeof(MainActivity));
-                            novatela.PutExtra("Id", item.Key);
-                            Console.WriteLine("placeholderfodase");
+                            novatela.PutExtra("Id", player.Id);
                             StartActivity(novatela);
                             return;
                         }
-                        else
+                   /*     else
                         {
                             string mensagem = string.Format("Usuário não cadastrado!");
                             Toast.MakeText(this, mensagem, ToastLength.Short).Show();
-                            
-                            return;
-                        }
+                            //return;
+                        }*/
                     }
-
-                   
-                   
                 }
                 else
                 {
@@ -109,22 +102,59 @@ namespace pedraPapelTesoura.Resources
             btnRanking.Click += BtnRanking_Click;
 
             await carregaDados();
-
         }
-
         private void BtnAdicionar_Click(object sender, EventArgs e)
         {
-            criarUsuario();
+            if(txtNome.Text != "" && txtSenha.Text != "")
+            {
+                criarUsuario();
+            }
+            else if(txtNome.Text == "")
+            {
+                string mensagem = string.Format("Insira um nome de usuário!");
+                Toast.MakeText(this, mensagem, ToastLength.Short).Show();
+            }
+            else if (txtSenha.Text == "")
+            {
+                string mensagem = string.Format("Insira uma senha!");
+                Toast.MakeText(this, mensagem, ToastLength.Short).Show();
+            }
+            else
+            {
+                string mensagem = string.Format("Insira nome de usuário e senha!");
+                Toast.MakeText(this, mensagem, ToastLength.Short).Show();
+            }
         }
-
         private async void criarUsuario()
         {
+            var firebase = new FirebaseClient(FirebaseURL);
+
+            var itens = await firebase
+        .Child("Players")
+        .OnceAsync<Player>();
+
+            foreach (var ite in itens)
+            {
+
+                Player jogador = new Player();
+                jogador.Id = ite.Key;
+                jogador.nome = ite.Object.nome;
+                jogador.Vitorias = ite.Object.Vitorias;
+
+                if (txtNome.Text.Equals(ite.Object.nome) && txtSenha.Text.Equals(ite.Object.senha))
+                {
+                    string mensagem = string.Format("Usuário já cadastrado!");
+                    Toast.MakeText(this, mensagem, ToastLength.Short).Show();
+                    return;
+                }
+
+            }
+
             Player player = new Player();
             player.Id = String.Empty;
             player.nome = txtNome.Text;
             player.senha = txtSenha.Text;
 
-            var firebase = new FirebaseClient(FirebaseURL);
             //Add Item
             var item = await firebase.Child("Players").PostAsync<Player>(player);
             await carregaDados();

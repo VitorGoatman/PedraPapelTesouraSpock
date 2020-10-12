@@ -53,11 +53,15 @@ namespace pedraPapelTesoura
         ImageView ImagePlayer;
         ImageView ImageCPU;
         ToggleButton Audio;
-        Button Teste;
+      //  Button Teste;
         EditText txtNome;
         listAdapter adapter;
         Player player;
 
+        string teste;
+        string nome;
+        string senha;
+        
         private const string FirebaseURL = "https://rpsls-1d228.firebaseio.com/"; //URL FIREBASE
 
         protected override async void OnCreate(Bundle savedInstanceState)
@@ -80,7 +84,7 @@ namespace pedraPapelTesoura
             ImageCPU = FindViewById<ImageView>(Resource.Id.imageViewCPU);
             Regras = FindViewById<Button>(Resource.Id.btnRegras);
             Audio = FindViewById<ToggleButton>(Resource.Id.toggleBtn);
-            Teste = FindViewById<Button>(Resource.Id.txtvT);
+           // Teste = FindViewById<Button>(Resource.Id.txtvT);
             await carregaDados();
 
             // txtNome = FindViewById<EditText>(Resource.Id.txtNome);
@@ -93,7 +97,7 @@ namespace pedraPapelTesoura
             Spock.Click += Spock_Click;
             Regras.Click += Regras_Click;
             Audio.Click += Musica_Click;
-            Teste.Click += Teste_Click;
+           // Teste.Click += Teste_Click;
 
             Placar.Text = "Jogador: " + pontosPlayer.ToString() + "     CPU: " + pontosComputer.ToString() + "     Empates: " + empates.ToString();
             placar = Placar.Text;
@@ -111,45 +115,32 @@ namespace pedraPapelTesoura
                 //Teste.Text = "Player: " + playerId.ToString() + "CPU : " + computerId.ToString();
                 
             }
-            
-
+            if (Intent.GetStringExtra("Id") != null)
+            {
+                teste = Intent.GetStringExtra("Id").ToString();
+                Player player = new Player();
+                player.Id = teste;
+            }
         }
 
         private async Task carregaDados()
         {
-            //  circular_progress.Visibility = ViewStates.Visible;
-            //   lstUsuarios.Visibility = ViewStates.Invisible;
-
             var firebase = new FirebaseClient(FirebaseURL);
 
             var itens = await firebase
                 .Child("Players")
                 .OnceAsync<Player>();
 
-       //     rankingPlayers.Clear();
-      //      adapter = null;
             foreach (var item in itens)
             {
                 Player player = new Player();
                 player.Id = item.Key;
                 player.nome = item.Object.nome;
                 player.Vitorias = item.Object.Vitorias;
-
-            //    rankingPlayers.Add(player);
-                /*
-            adapter = new listAdapter(this, rankingPlayers);
-            adapter.NotifyDataSetChanged();
-            lstUsuarios.Adapter = adapter;
-            lstUsuarios.Visibility = ViewStates.Visible; */
             }
-           /* if (Intent.GetStringExtra("Id") != null)
-                player.Id = Intent.GetStringExtra("Id").ToString();
-            Console.WriteLine("Placeholdermsmsla");*/
-            // circular_progress.Visibility = ViewStates.Invisible;
-        
         }
 
-        private void Teste_Click(object sender, EventArgs e)
+     /*   private void Teste_Click(object sender, EventArgs e)
         {
 
             gravarDados();
@@ -158,40 +149,58 @@ namespace pedraPapelTesoura
             caixa.SetTitle("Obrigado por jogar!");
             caixa.SetMessage("Confira sua posição no ranking!");
             caixa.Show();
-            StartTimer();
+         //   StartTimer();
 
     //        Intent telainicial = new Intent(this, typeof(tela_inicial));
       //      StartActivity(telainicial);
-        }
+        }*/
         private async void gravarDados()
         {
-            /* var firebase = new FirebaseClient(FirebaseURL);
-             await firebase.Child("Players").Child(player.Id).PutAsync(new Player(txtNome.Text, vitorias));
-             await carregaDados();
-             txtNome.Text = "";
-             vitorias = 0;*/
-
-            await carregaDados();
-
-
             var firebase = new FirebaseClient(FirebaseURL);
-            Console.WriteLine("placeholderfodase");
-           
-            await firebase.Child("Players").Child(player.Id).PutAsync(player.Vitorias);
-            Console.WriteLine(player.Id);
-            Console.WriteLine(player.Vitorias);
-            await carregaDados();
-            Console.WriteLine("placeholderfodase");
-            txtNome.Text = "";
-            vitorias = 0;
-           
 
+            var itens = await firebase
+                .Child("Players")
+                .OnceAsync<Player>();
+
+            foreach (var item in itens)
+            {
+                Player player = new Player();
+                player.Id = item.Key;
+                player.nome = item.Object.nome;
+                player.Vitorias = item.Object.Vitorias;
+                player.senha = item.Object.senha;
+                if (player.Id == teste)
+                {
+                    senha = item.Object.senha;
+                    nome = item.Object.nome;
+
+                    AjusteVitorias();
+                    if (vitorias >= item.Object.Vitorias)
+                    {
+                        await firebase.Child("Players").Child(player.Id).PutAsync(new Player(senha, nome, vitorias));
+                        await carregaDados();
+                    }
+                    else
+                    {
+                        return;
+                    }
+
+                }
+            }
+            
+
+
+        }
+
+        private void AjusteVitorias()
+        {
+            
         }
 
         public async void StartTimer()
         {
-            await Task.Delay(5000); //5 segundos
-            StartActivity(typeof(tela_inicial));
+         //   await Task.Delay(5000); //5 segundos
+         //   StartActivity(typeof(tela_inicial));
         }
 
         private void Musica_Click(object sender, EventArgs e)
@@ -289,7 +298,7 @@ namespace pedraPapelTesoura
                 }
 
                 vitorias++;
-              
+                gravarDados();
 
                 Android.App.AlertDialog.Builder caixa = new Android.App.AlertDialog.Builder(this);
                 caixa.SetTitle("Fim de jogo!");
@@ -376,7 +385,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-               
+                gravarDados();
             }
         }
 
@@ -451,7 +460,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-              
+                gravarDados();
             }
         }
         private void Papel_Click(object sender, EventArgs e)
@@ -527,7 +536,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-              
+                gravarDados();
             }
         }
 
@@ -603,7 +612,7 @@ namespace pedraPapelTesoura
                 placar = Placar.Text;
 
                 vitorias++;
-             
+                gravarDados();
             }
 
         }
