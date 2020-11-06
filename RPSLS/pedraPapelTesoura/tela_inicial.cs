@@ -160,6 +160,9 @@ namespace pedraPapelTesoura.Resources
             await carregaDados();
             txtNome.Text = "";
             txtSenha.Text = "";
+            string mensagemCadastro = string.Format("Seu cadastro foi concluído");
+            Toast.MakeText(this, mensagemCadastro, ToastLength.Short).Show();
+            return;
         }
 
         private void BtnRanking_Click(object sender, EventArgs e)
